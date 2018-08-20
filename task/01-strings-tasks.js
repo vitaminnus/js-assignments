@@ -20,8 +20,7 @@
  *   '',  'bb'  => 'bb'
  */
 export function concatenateStrings(value1, value2) {
-  /* implement your code here */
-  throw new Error('Not implemented');
+  return value1 + value2;
 }
 
 /**
@@ -36,8 +35,7 @@ export function concatenateStrings(value1, value2) {
  *   ''      => 0
  */
 export function getStringLength(value) {
-  /* implement your code here */
-  throw new Error('Not implemented');
+  return value.split('').length;
 }
 
 /**
@@ -54,8 +52,7 @@ export function getStringLength(value) {
  *   'Chuck','Norris'  => 'Hello, Chuck Norris!'
  */
 export function getStringFromTemplate(firstName, lastName) {
-  /* implement your code here */
-  throw new Error('Not implemented');
+  return `Hello, ${firstName} ${lastName}!`;
 }
 
 /**
@@ -69,8 +66,11 @@ export function getStringFromTemplate(firstName, lastName) {
  *   'Hello, Chuck Norris!' => 'Chuck Norris'
  */
 export function  extractNameFromTemplate(value) {
-  /* implement your code here */
-  throw new Error('Not implemented');
+  let arr = value.split('');
+  arr.splice(0, 7);
+  arr.splice(-1, 1);
+  arr = arr.join('');
+  return arr;
 }
 
 
@@ -85,8 +85,7 @@ export function  extractNameFromTemplate(value) {
  *   'cat'       => 'c'
  */
 export function getFirstChar(value) {
-  /* implement your code here */
-  throw new Error('Not implemented');
+  return value[0];
 }
 
 /**
@@ -101,8 +100,28 @@ export function getFirstChar(value) {
  *   '\tHello, World! ' => 'Hello, World!'
  */
 export function removeLeadingAndTrailingWhitespaces(value) {
-  /* implement your code here */
-  throw new Error('Not implemented');
+  let arr = value.split('');
+  const caps = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  let index = 0;
+  arr.find((el, i) => {
+    if (caps.indexOf(el) !== -1) {
+      index = i;
+      return true;
+    }
+  });
+  function cutSpace(array) {
+    let length = array.length;
+    if (array[length-1] === ' ') {
+      array.splice(-1, 1);
+      cutSpace(array);
+    } else {
+      return array;
+    }
+    return array;
+  }
+  arr.splice(0, index);
+  arr = cutSpace(arr);
+  return arr.join('');
 }
 
 /**
@@ -117,8 +136,11 @@ export function removeLeadingAndTrailingWhitespaces(value) {
  *   'cat', 3 => 'catcatcat'
  */
 export function repeatString(value, count) {
-  /* implement your code here */
-  throw new Error('Not implemented');
+  let result = '';
+  for (let i=0;i<count;i++) {
+    result += value;
+  }
+  return result;
 }
 
 /**
@@ -134,8 +156,14 @@ export function repeatString(value, count) {
  *   'ABABAB','BA' => 'ABAB'
  */
 export function removeFirstOccurrences(str, value)  {
-  /* implement your code here */
-  throw new Error('Not implemented');
+  let arrStr = str.split('');
+  let arrValue = value.split('');
+  let index = str.indexOf(value);
+  if (index === -1) {
+    return str;
+  }
+  arrStr.splice(index, arrValue.length);
+  return arrStr.join('');
 }
 
 /**
@@ -150,8 +178,10 @@ export function removeFirstOccurrences(str, value)  {
  *   '<a>' => 'a'
  */
 export function unbracketTag(str) {
-  /* implement your code here */
-  throw new Error('Not implemented');
+  let arr = str.split('');
+  arr.splice(0, 1);
+  arr.splice(-1, 1);
+  return arr.join('');
 }
 
 
@@ -166,8 +196,7 @@ export function unbracketTag(str) {
  *  'abcdefghijklmnopqrstuvwxyz' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
  */
 export function convertToUpperCase(str) {
-  /* implement your code here */
-  throw new Error('Not implemented');
+  return str.toUpperCase();
 }
 
 /**
@@ -182,8 +211,7 @@ export function convertToUpperCase(str) {
  *   'info@gmail.com' => ['info@gmail.com']
  */
 export function extractEmails(str) {
-  /* implement your code here */
-  throw new Error('Not implemented');
+  return str.split(';');
 }
 
 /**
@@ -210,8 +238,24 @@ export function extractEmails(str) {
  *
  */
 export function getRectangleString(width, height) {
-  /* implement your code here */
-  throw new Error('Not implemented');
+  let result = '';
+  function drawLine(firstElement, middleElement, lastElement){
+    result += firstElement;
+    for (let j=1;j<width-1;j++) {
+      result += middleElement;
+    }
+    result += lastElement + '\n';
+  }
+  for (let i=0;i<height;i++){
+    if (i === 0){
+      drawLine('\u250c', '\u2500', '\u2510');
+    } else if (i === height-1){
+      drawLine('\u2514', '\u2500', '\u2518');
+    } else {
+      drawLine('\u2502', ' ', '\u2502');
+    }
+  }
+  return result;
 }
 
 
@@ -227,7 +271,7 @@ export function getRectangleString(width, height) {
  *   'hello' => 'uryyb'
  *   'Why did the chicken cross the road?' => 'Jul qvq gur puvpxra pebff gur ebnq?'
  *   'Gb trg gb gur bgure fvqr!' => 'To get to the other side!'
- *   'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz' => 
+ *   'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz' =>
  *          'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
