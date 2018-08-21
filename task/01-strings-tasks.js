@@ -100,28 +100,29 @@ export function getFirstChar(value) {
  *   '\tHello, World! ' => 'Hello, World!'
  */
 export function removeLeadingAndTrailingWhitespaces(value) {
-  let arr = value.split('');
-  const caps = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  let index = 0;
-  arr.find((el, i) => {
-    if (caps.indexOf(el) !== -1) {
-      index = i;
-      return true;
-    }
-  });
-  function cutSpace(array) {
-    let length = array.length;
-    if (array[length-1] === ' ') {
-      array.splice(-1, 1);
-      cutSpace(array);
-    } else {
-      return array;
-    }
-    return array;
-  }
-  arr.splice(0, index);
-  arr = cutSpace(arr);
-  return arr.join('');
+  return value.trim();  //should be better;
+  // let arr = value.split('');
+  // const caps = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  // let index = 0;
+  // arr.find((el, i) => {
+  //   if (caps.indexOf(el) !== -1) {
+  //     index = i;
+  //     return true;
+  //   }
+  // });
+  // function cutSpace(array) {
+  //   let length = array.length;
+  //   if (array[length-1] === ' ') {
+  //     array.splice(-1, 1);
+  //     cutSpace(array);
+  //   } else {
+  //     return array;
+  //   }
+  //   return array;
+  // }
+  // arr.splice(0, index);
+  // arr = cutSpace(arr);
+  // return arr.join('');
 }
 
 /**
@@ -156,14 +157,15 @@ export function repeatString(value, count) {
  *   'ABABAB','BA' => 'ABAB'
  */
 export function removeFirstOccurrences(str, value)  {
-  let arrStr = str.split('');
-  let arrValue = value.split('');
-  let index = str.indexOf(value);
-  if (index === -1) {
-    return str;
-  }
-  arrStr.splice(index, arrValue.length);
-  return arrStr.join('');
+  return str.replace(value, '');  //should be better;
+  // let arrStr = str.split('');
+  // let arrValue = value.split('');
+  // let index = str.indexOf(value);
+  // if (index === -1) {
+  //   return str;
+  // }
+  // arrStr.splice(index, arrValue.length);
+  // return arrStr.join('');
 }
 
 /**
@@ -178,10 +180,11 @@ export function removeFirstOccurrences(str, value)  {
  *   '<a>' => 'a'
  */
 export function unbracketTag(str) {
-  let arr = str.split('');
-  arr.splice(0, 1);
-  arr.splice(-1, 1);
-  return arr.join('');
+  return str.substring(1, str.length-1);  // should be better
+  // let arr = str.split('');
+  // arr.splice(0, 1);
+  // arr.splice(-1, 1);
+  // return arr.join('');
 }
 
 
@@ -276,8 +279,26 @@ export function getRectangleString(width, height) {
  *
  */
 export function encodeToRot13(str) {
-  /* implement your code here */
-  throw new Error('Not implemented');
+  const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+  const COUNT_ROT = 13;
+  const length = letters.length;
+  let result = str.split('');
+
+  result.forEach((letter, i) => {
+    if (letters.indexOf(letter) === -1) {
+      result[i] = letter;
+    } else {
+      let index = letters.indexOf(letter);
+      let encodeIndex;
+      if (index < length/2) {
+        encodeIndex = index + COUNT_ROT >= (length/2) ? (index + COUNT_ROT) % (length/2) : index + COUNT_ROT;
+      } else {
+        encodeIndex = index + COUNT_ROT >= length ? (index + COUNT_ROT + (length/2)) % length : index + COUNT_ROT;
+      }
+      result[i] = letters[encodeIndex];
+    }
+  });
+  return result.join('');
 }
 
 /**
@@ -294,8 +315,7 @@ export function encodeToRot13(str) {
  *   isString(new String('test')) => true
  */
 export function isString(value) {
-  /* implement your code here */
-  throw new Error('Not implemented');
+  return Object.prototype.toString.call(value) === '[object String]';
 }
 
 
@@ -324,6 +344,7 @@ export function isString(value) {
  *   'K♠' => 51
  */
 export function getCardId(value) {
-  /* implement your code here */
-  throw new Error('Not implemented');
+  const deck = ['A♣', '2♣', '3♣', '4♣', '5♣', '6♣', '7♣', '8♣', '9♣', '10♣', 'J♣', 'Q♣', 'K♣', 'A♦', '2♦', '3♦', '4♦', '5♦', '6♦', '7♦', '8♦', '9♦', '10♦', 'J♦', 'Q♦', 'K♦', 'A♥', '2♥', '3♥', '4♥', '5♥', '6♥', '7♥', '8♥', '9♥', '10♥', 'J♥', 'Q♥', 'K♥', 'A♠', '2♠', '3♠', '4♠', '5♠', '6♠', '7♠', '8♠', '9♠', '10♠', 'J♠', 'Q♠', 'K♠'];
+  let index = deck.indexOf(value);
+  return index;
 }
