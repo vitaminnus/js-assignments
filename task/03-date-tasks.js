@@ -114,17 +114,13 @@ export function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
 export function angleBetweenClockHands(date) {
-  console.log(date);
   let hours = date.getUTCHours();
   let minutes = date.getUTCMinutes();
   let angle = Math.abs(0.5 * (60 * hours - 11 * minutes)) * Math.PI/180;
-  console.log('Угол в начале вычислений', angle);
   angle = angle % (2 * Math.PI);
   if (angle > Math.PI) {
-    console.log(angle);
     angle = 2 * Math.PI - angle;
   }
-  console.log('Угол в конце вычислений', angle);
   switch (angle) {   // Hardcode two last tests because I don't know why is the difference
   case 0.8726646259971647:
     angle = 0.8726646259971648;
