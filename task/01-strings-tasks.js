@@ -35,7 +35,7 @@ export function concatenateStrings(value1, value2) {
  *   ''      => 0
  */
 export function getStringLength(value) {
-  return value.split('').length;
+  return value.length;
 }
 
 /**
@@ -66,11 +66,7 @@ export function getStringFromTemplate(firstName, lastName) {
  *   'Hello, Chuck Norris!' => 'Chuck Norris'
  */
 export function  extractNameFromTemplate(value) {
-  let arr = value.split('');
-  arr.splice(0, 7);
-  arr.splice(-1, 1);
-  arr = arr.join('');
-  return arr;
+  return value.slice(7, -1);
 }
 
 
@@ -100,29 +96,7 @@ export function getFirstChar(value) {
  *   '\tHello, World! ' => 'Hello, World!'
  */
 export function removeLeadingAndTrailingWhitespaces(value) {
-  return value.trim();  //should be better;
-  // let arr = value.split('');
-  // const caps = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  // let index = 0;
-  // arr.find((el, i) => {
-  //   if (caps.indexOf(el) !== -1) {
-  //     index = i;
-  //     return true;
-  //   }
-  // });
-  // function cutSpace(array) {
-  //   let length = array.length;
-  //   if (array[length-1] === ' ') {
-  //     array.splice(-1, 1);
-  //     cutSpace(array);
-  //   } else {
-  //     return array;
-  //   }
-  //   return array;
-  // }
-  // arr.splice(0, index);
-  // arr = cutSpace(arr);
-  // return arr.join('');
+  return value.trim();
 }
 
 /**
@@ -136,12 +110,8 @@ export function removeLeadingAndTrailingWhitespaces(value) {
  *   'A', 5  => 'AAAAA'
  *   'cat', 3 => 'catcatcat'
  */
-export function repeatString(value, count) {
-  let result = '';
-  for (let i=0;i<count;i++) {
-    result += value;
-  }
-  return result;
+export function repeatString(value, count) {  
+  return value.repeat(count);
 }
 
 /**
@@ -157,15 +127,7 @@ export function repeatString(value, count) {
  *   'ABABAB','BA' => 'ABAB'
  */
 export function removeFirstOccurrences(str, value)  {
-  return str.replace(value, '');  //should be better;
-  // let arrStr = str.split('');
-  // let arrValue = value.split('');
-  // let index = str.indexOf(value);
-  // if (index === -1) {
-  //   return str;
-  // }
-  // arrStr.splice(index, arrValue.length);
-  // return arrStr.join('');
+  return str.replace(value, '');
 }
 
 /**
@@ -180,11 +142,7 @@ export function removeFirstOccurrences(str, value)  {
  *   '<a>' => 'a'
  */
 export function unbracketTag(str) {
-  return str.substring(1, str.length-1);  // should be better
-  // let arr = str.split('');
-  // arr.splice(0, 1);
-  // arr.splice(-1, 1);
-  // return arr.join('');
+  return str.slice(1, -1);
 }
 
 

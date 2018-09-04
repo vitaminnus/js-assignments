@@ -102,16 +102,6 @@ export function* getFibonacciSequence() {
  *
  */
 export function* depthTraversalTree(root) {
-  // console.log(root);
-  // if (root) {
-  //   for (let item in depthTraversalTree(root.left)) {
-  //     yield item;    
-  //   }
-  //   yield root.label;
-  //   for (let item in depthTraversalTree(root.right)) {
-  //     yield item;    
-  //   }
-  // }
   throw new Error('Not implemented');
 }
 
