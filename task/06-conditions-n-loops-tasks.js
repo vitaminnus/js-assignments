@@ -511,8 +511,28 @@ export function toNaryString(num, n) {
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
 export function getCommonDirectoryPath(pathes) {
-  /* implement your code here */
-  throw new Error('Not implemented');
+  let result = [];
+  let firstSelector = '';
+  if (pathes.every(el => el[0] === '/')) {
+    firstSelector = '/';
+  } 
+  let arrays = pathes.map(path => path.split('/'));
+  let sortableArrays = arrays.sort((a, b) => b.length - a.length);
+  for (let i=0;i<sortableArrays[0].length;i++){
+    let temp = arrays[0][i]; 
+    let flag = true;
+    for (let j=0;j<arrays.length;j++){      
+      if (arrays[j][i] !== temp) {
+        flag = false;
+      }
+    }
+    if (flag && result.length === i) {
+      result.push(temp);
+    }    
+  }  
+  result = result.filter(n => n);
+  result = result.join('/').length ? result.join('/') + '/' : '';
+  return firstSelector + result;
 }
 
 
@@ -535,8 +555,20 @@ export function getCommonDirectoryPath(pathes) {
  *
  */
 export function getMatrixProduct(m1, m2) {
-  /* implement your code here */
-  throw new Error('Not implemented');
+  let aNumRows = m1.length, 
+    aNumCols = m1[0].length,
+    bNumCols = m2[0].length,
+    m = new Array(aNumRows);
+  for (let x = 0; x < aNumRows; ++x) {
+    m[x] = new Array(bNumCols);
+    for (let i = 0; i < bNumCols; ++i) {
+      m[x][i] = 0;
+      for (let j = 0; j < aNumCols; ++j) {
+        m[x][i] += m1[x][j] * m2[j][i];
+      }
+    }
+  }
+  return m;
 }
 
 
@@ -571,6 +603,61 @@ export function getMatrixProduct(m1, m2) {
  *
  */
 export function evaluateTicTacToePosition(position) {
-  /* implement your code here */
-  throw new Error('Not implemented');
+  let length = position.length;
+  if (position.every(arr => arr.filter(n => n).length === 0)) {
+    return undefined;
+  }
+  let winner = undefined;
+  for (let i=0;i<length;i++){
+    let flagRow = true;
+    let tempRow = position[i][0]; 
+    for (let j=0;j<length;j++){
+      if(position[i][j] !== tempRow){
+        flagRow = false;
+      }  
+    }
+    if (flagRow){
+      winner = tempRow;
+    }  
+    flagRow = true;   
+  }
+
+  let flagDiagonal = true;
+  let flagColumn = true;
+  let tempDiagonal;
+  let tempColumn;  
+  for (let i=0;i<length;i++){
+    tempDiagonal = position[0][0];
+    tempColumn = position[0][i];    
+    for (let j=0;j<length;j++){
+      if(i === j && position[j][i] !== tempDiagonal){
+        flagDiagonal = false;
+      }  
+      if(position[j][i] !== tempColumn){
+        flagColumn = false;
+      }  
+    }   
+    if (flagColumn){
+      winner = tempColumn;
+    }  
+    flagColumn = true;
+  }
+  if (flagDiagonal){
+    winner = tempDiagonal;
+  }  
+  
+  let wrongDiagonalFlag = true;
+  let tempWrongDiagonal = position[length-1][0];
+  let j = length-1;
+  for (let i=0;i<length;i++){    
+    if (position[j][i] !== tempWrongDiagonal){
+      wrongDiagonalFlag = false;
+    }
+    --j;
+  }
+  if (wrongDiagonalFlag){
+    winner = tempWrongDiagonal;
+  }   
+
+  return winner;
 }
