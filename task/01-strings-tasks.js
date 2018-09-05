@@ -237,23 +237,17 @@ export function getRectangleString(width, height) {
  *
  */
 export function encodeToRot13(str) {
-  const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-  const COUNT_ROT = 13;
-  const length = letters.length;
-  let result = str.split('');
+  const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  let arr = str.split('');
 
-  result.forEach((letter, i) => {
-    if (letters.indexOf(letter) === -1) {
-      result[i] = letter;
+  let result = arr.map(letter => {
+    let upperCaseLetter = letter.toUpperCase();
+    let index = letters.indexOf(upperCaseLetter);
+    if (index === -1) {
+      return letter;
     } else {
-      let index = letters.indexOf(letter);
-      let encodeIndex;
-      if (index < length/2) {
-        encodeIndex = index + COUNT_ROT >= (length/2) ? (index + COUNT_ROT) % (length/2) : index + COUNT_ROT;
-      } else {
-        encodeIndex = index + COUNT_ROT >= length ? (index + COUNT_ROT + (length/2)) % length : index + COUNT_ROT;
-      }
-      result[i] = letters[encodeIndex];
+      let encodeIndex = (index + 13) % 26;      
+      return letter === letter.toUpperCase() ? letters[encodeIndex] : letters[encodeIndex].toLowerCase();
     }
   });
   return result.join('');
@@ -302,7 +296,43 @@ export function isString(value) {
  *   'K♠' => 51
  */
 export function getCardId(value) {
-  const deck = ['A♣', '2♣', '3♣', '4♣', '5♣', '6♣', '7♣', '8♣', '9♣', '10♣', 'J♣', 'Q♣', 'K♣', 'A♦', '2♦', '3♦', '4♦', '5♦', '6♦', '7♦', '8♦', '9♦', '10♦', 'J♦', 'Q♦', 'K♦', 'A♥', '2♥', '3♥', '4♥', '5♥', '6♥', '7♥', '8♥', '9♥', '10♥', 'J♥', 'Q♥', 'K♥', 'A♠', '2♠', '3♠', '4♠', '5♠', '6♠', '7♠', '8♠', '9♠', '10♠', 'J♠', 'Q♠', 'K♠'];
-  let index = deck.indexOf(value);
-  return index;
+  let i;
+  let j;
+  let temp = value[1];
+  switch(true){
+  case value[0] === 'A':
+    i = 0;
+    break;
+  case value[0] === 'J':
+    i = 10;
+    break;
+  case value[0] === 'Q':
+    i = 11;
+    break;
+  case value[0] === 'K':
+    i = 12;
+    break;
+  case value[0] === '1':
+    i = 9;
+    temp = value[2];
+    break;
+  case value[0] >= 2 && value[0] <= 9 :
+    i = value[0] - 1;
+    break;
+  } 
+  switch(temp){
+  case '\u2663':
+    j = 0;
+    break;
+  case '\u2666':
+    j = 1;
+    break;
+  case '\u2665':
+    j = 2;
+    break;
+  case '\u2660':
+    j = 3;
+    break;    
+  }  
+  return j * 13 + i;
 }
