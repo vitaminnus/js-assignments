@@ -102,6 +102,21 @@ export function* getFibonacciSequence() {
  *
  */
 export function* depthTraversalTree(root) {
+  // let stack = [];
+  // stack.unshift(root);
+  // while(stack.length > 0) {
+  //   let node = stack.shift();
+  //   yield node;
+  //   if(node.children){
+  //     for(let i = node.children.length - 1; i >= 0; i--){
+  //       let child = node.children[i];
+  //       if(!child.discovered){
+  //         child.discovered = true;
+  //         stack.unshift(child);
+  //       }
+  //     }
+  //   }
+  // }
   throw new Error('Not implemented');
 }
 
