@@ -102,22 +102,18 @@ export function* getFibonacciSequence() {
  *
  */
 export function* depthTraversalTree(root) {
-  // let stack = [];
-  // stack.unshift(root);
-  // while(stack.length > 0) {
-  //   let node = stack.shift();
-  //   yield node;
-  //   if(node.children){
-  //     for(let i = node.children.length - 1; i >= 0; i--){
-  //       let child = node.children[i];
-  //       if(!child.discovered){
-  //         child.discovered = true;
-  //         stack.unshift(child);
-  //       }
-  //     }
-  //   }
-  // }
-  throw new Error('Not implemented');
+  let stack = [];
+  stack.push(root);
+  while(stack.length > 0) {
+    let node = stack.pop();
+    yield node;
+    if(node.children){
+      for(let i = node.children.length - 1; i >= 0; i--){
+        let child = node.children[i];
+        stack.push(child);
+      }
+    }
+  }
 }
 
 
@@ -143,7 +139,19 @@ export function* depthTraversalTree(root) {
  *
  */
 export function* breadthTraversalTree(root) {
-  throw new Error('Not implemented');
+  let queue = [];
+  queue.push(root);
+  let x = 0;
+  while(queue.length > x) {      
+    let node = queue[x];
+    yield node;
+    if(node.children){
+      for(let i = 0; i < node.children.length; i++){
+        queue.push(node.children[i]);
+      }
+    }
+    x += 1; 
+  }   
 }
 
 
@@ -161,5 +169,41 @@ export function* breadthTraversalTree(root) {
  *   [ 1, 3, 5, ... ], [ -1 ] => [ -1, 1, 3, 5, ...]
  */
 export function* mergeSortedSequences(source1, source2) {
-  throw new Error('Not implemented');
+  let result = []; 
+  let func1 = source1();
+  let func2 = source2();
+  let one;
+  let two;
+  for (let i = 0; true; i+=2){
+    let obj1 = func1.next();
+    let obj2 = func2.next();
+
+    one = obj1.value;
+    two = obj2.value; 
+    
+    if(one > two){
+      let that = one;
+      one = two;
+      two = that;
+    }
+
+    if (!obj1.done){
+      result.push(one);       
+    } else {
+      i -= 1;
+    }   
+
+    if (!obj2.done){      
+      result.push(two);     
+    } else {
+      i -= 1;
+    }   
+
+    if (obj1.done || obj2.done){
+      yield result[i+1];
+    } else {
+      yield result[i];
+      yield result[i+1];
+    }       
+  } 
 }
