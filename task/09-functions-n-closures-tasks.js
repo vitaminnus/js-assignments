@@ -25,8 +25,9 @@
  *
  */
 export function getComposition(f, g) {
-  /* implement your code here */
-  throw new Error('Not implemented');
+  return function(x){
+    return f(g(x));
+  };
 }
 
 
