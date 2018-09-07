@@ -67,9 +67,15 @@ export function getPowerFunction(exponent) {
  *   getPolynom(8)     => y = 8
  *   getPolynom()      => null
  */
-export function getPolynom() {
-  /* implement your code here */
-  throw new Error('Not implemented');
+export function getPolynom(...args) {    
+  let reversArray = args.reverse();
+  return function(x){
+    let result = 0;    
+    for (let i=0;i<reversArray.length;i++){
+      result += reversArray[i] * Math.pow(x, i);
+    }
+    return result;
+  };
 }
 
 
@@ -88,8 +94,18 @@ export function getPolynom() {
  *   memoizer() => the same random number  (next run, returns the previous cached result)
  */
 export function memoize(func) {
-  /* implement your code here */
-  throw new Error('Not implemented');
+  let cache = {};
+  return (...args) => {
+    let n = args[0];
+    if (n in cache) {
+      return cache[n];
+    }
+    else {
+      let result = func(n);
+      cache[n] = result;
+      return result;
+    }
+  };
 }
 
 
@@ -109,6 +125,16 @@ export function memoize(func) {
  * retryer() => 2
  */
 export function retry(func, attempts) {
+  // let counter = 0;  
+  // let res = func();
+  // return function(){
+  //   if (!res && counter <= attempts){
+  //     counter++;
+  //     return func;
+  //   } else {
+  //     return attempts;
+  //   }
+  // };  
   /* implement your code here */
   throw new Error('Not implemented');
 }
@@ -156,7 +182,16 @@ export function logger(func, logFunc) {
  *   partialUsingArguments(fn, 'a','b','c')('d') => 'abcd'
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
-export function partialUsingArguments(fn) {
+export function partialUsingArguments(...args) {
+  // let data =[];  
+  // let func = args[0];
+  // let res = args.slice(1);
+  // let arr = data.concat(res);
+  
+  // return function(func, ...arr){    
+  //   let result = func.apply(this, data);
+  //   return result;
+  // };
   /* implement your code here */
   throw new Error('Not implemented');
 }
@@ -180,6 +215,9 @@ export function partialUsingArguments(fn) {
  *   getId10() => 11
  */
 export function getIdGeneratorFunction(startFrom) {
-  /* implement your code here */
-  throw new Error('Not implemented');
+  let start = startFrom - 1;
+  return ()=>{
+    start++;
+    return start;
+  };
 }
