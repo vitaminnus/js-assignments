@@ -125,18 +125,17 @@ export function memoize(func) {
  * retryer() => 2
  */
 export function retry(func, attempts) {
-  // let counter = 0;  
-  // let res = func();
-  // return function(){
-  //   if (!res && counter <= attempts){
-  //     counter++;
-  //     return func;
-  //   } else {
-  //     return attempts;
-  //   }
-  // };  
-  /* implement your code here */
-  throw new Error('Not implemented');
+  function f(){
+    for(let i=0;i<attempts;i++){
+      try {  
+        let res = func();
+        return res;
+      } catch(e) {
+        console.log(e.message);
+      }
+    }      
+  }     
+  return f;
 }
 
 
@@ -156,7 +155,7 @@ export function retry(func, attempts) {
  * @example
  *
  * var cosLogger = logger(Math.cos, console.log);
- * var result = cosLogger(Math.PI));     // -1
+ * var result = cosLogger(Math.PI);     // -1
  *
  * log from console.log:
  * cos(3.141592653589793) starts
@@ -164,8 +163,13 @@ export function retry(func, attempts) {
  *
  */
 export function logger(func, logFunc) {
-  /* implement your code here */
-  throw new Error('Not implemented');
+  return function(...args){
+    let string = JSON.stringify(args).slice(1, -1);
+    logFunc(`${func.name}(${string}) starts`);
+    let result = func(...args);
+    logFunc(`${func.name}(${string}) ends`);     
+    return result;
+  };
 }
 
 
@@ -183,17 +187,12 @@ export function logger(func, logFunc) {
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
 export function partialUsingArguments(...args) {
-  // let data =[];  
-  // let func = args[0];
-  // let res = args.slice(1);
-  // let arr = data.concat(res);
-  
-  // return function(func, ...arr){    
-  //   let result = func.apply(this, data);
-  //   return result;
-  // };
-  /* implement your code here */
-  throw new Error('Not implemented');
+  let func = args[0];
+  let res = args.slice(1);  
+  return function(...arr){    
+    let resultData = res.concat(arr);
+    return func(...resultData);
+  };
 }
 
 
