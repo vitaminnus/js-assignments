@@ -16,9 +16,57 @@
  *  ]
  */
 export function createCompassPoints(sides = ['N', 'E', 'S', 'W']) {
-  /* implement your code here */
-  /* use array of cardinal directions only! it is a default parameter! */
-  throw new Error('Not implemented');
+  let result = [];
+  let step = 11.25;  
+  let azimuth = 0;
+  let directionsArr = [];
+
+  function addBetween(source){
+    let target = [];
+    source.forEach((el, i) => {
+      target.push(el);
+      if(i % 2 !== 0) {
+        target.push((source[i+1] || source[0]) + el);
+      } else {
+        target.push(el + (source[i+1] || source[0]));
+      }    
+    });
+    return target;
+  }
+  
+  directionsArr = addBetween(sides);
+  directionsArr = addBetween(directionsArr);  
+
+  function addBy(source){
+    let target = [];
+    source.forEach((el, i) => {
+      target.push(el);
+      if (el.length === 1){
+        target.push(el + 'b' + sides[(sides.findIndex(x => x === el)+1) % sides.length]);
+      } else if (source[i+1] && source[i+1].length === 1){
+        target.push(source[i+1] + 'b' + sides[sides.findIndex(x => x === source[i+1])-1]);
+      } else if (source[i+1] && source[i+1].length > el.length) {
+        target.push(el + 'b' + source[i+1][0]);
+      } else if (source[i+1] && source[i+1].length < el.length) {
+        target.push(source[i+1] + 'b' + el[0]);
+      } else {
+        target.push(source[0] + 'b' + sides[3]);
+      }    
+    });
+    return target;
+  }
+
+  directionsArr = addBy(directionsArr);
+
+  for (let i=0;i<32;i++){
+    let obj = {};  
+    obj.abbreviation = directionsArr[i];
+    obj.azimuth = azimuth;
+    result.push(obj);
+    azimuth += step;
+  }
+  return result;
+
 }
 
 

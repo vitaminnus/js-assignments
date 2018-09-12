@@ -186,11 +186,9 @@ export function logger(func, logFunc) {
  *   partialUsingArguments(fn, 'a','b','c')('d') => 'abcd'
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
-export function partialUsingArguments(...args) {
-  let func = args[0];
-  let res = args.slice(1);  
+export function partialUsingArguments(func, ...args) {
   return function(...arr){    
-    let resultData = res.concat(arr);
+    let resultData = args.concat(arr);
     return func(...resultData);
   };
 }
@@ -214,9 +212,7 @@ export function partialUsingArguments(...args) {
  *   getId10() => 11
  */
 export function getIdGeneratorFunction(startFrom) {
-  let start = startFrom - 1;
-  return ()=>{
-    start++;
-    return start;
+  return ()=>{    
+    return startFrom++;
   };
 }
