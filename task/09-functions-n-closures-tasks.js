@@ -25,8 +25,9 @@
  *
  */
 export function getComposition(f, g) {
-  /* implement your code here */
-  throw new Error('Not implemented');
+  return function(x){
+    return f(g(x));
+  };
 }
 
 
@@ -47,8 +48,9 @@ export function getComposition(f, g) {
  *
  */
 export function getPowerFunction(exponent) {
-  /* implement your code here */
-  throw new Error('Not implemented');
+  return function(x){
+    return Math.pow(x, exponent);
+  };
 }
 
 
@@ -65,9 +67,15 @@ export function getPowerFunction(exponent) {
  *   getPolynom(8)     => y = 8
  *   getPolynom()      => null
  */
-export function getPolynom() {
-  /* implement your code here */
-  throw new Error('Not implemented');
+export function getPolynom(...args) {    
+  let reversArray = args.reverse();
+  return function(x){
+    let result = 0;    
+    for (let i=0;i<reversArray.length;i++){
+      result += reversArray[i] * Math.pow(x, i);
+    }
+    return result;
+  };
 }
 
 
@@ -86,8 +94,18 @@ export function getPolynom() {
  *   memoizer() => the same random number  (next run, returns the previous cached result)
  */
 export function memoize(func) {
-  /* implement your code here */
-  throw new Error('Not implemented');
+  let cache = {};
+  return (...args) => {
+    let n = args[0];
+    if (n in cache) {
+      return cache[n];
+    }
+    else {
+      let result = func(n);
+      cache[n] = result;
+      return result;
+    }
+  };
 }
 
 
@@ -107,8 +125,17 @@ export function memoize(func) {
  * retryer() => 2
  */
 export function retry(func, attempts) {
-  /* implement your code here */
-  throw new Error('Not implemented');
+  function f(){
+    for(let i=0;i<attempts;i++){
+      try {  
+        let res = func();
+        return res;
+      } catch(e) {
+        console.log(e.message);
+      }
+    }      
+  }     
+  return f;
 }
 
 
@@ -128,7 +155,7 @@ export function retry(func, attempts) {
  * @example
  *
  * var cosLogger = logger(Math.cos, console.log);
- * var result = cosLogger(Math.PI));     // -1
+ * var result = cosLogger(Math.PI);     // -1
  *
  * log from console.log:
  * cos(3.141592653589793) starts
@@ -136,8 +163,13 @@ export function retry(func, attempts) {
  *
  */
 export function logger(func, logFunc) {
-  /* implement your code here */
-  throw new Error('Not implemented');
+  return function(...args){
+    let string = JSON.stringify(args).slice(1, -1);
+    logFunc(`${func.name}(${string}) starts`);
+    let result = func(...args);
+    logFunc(`${func.name}(${string}) ends`);     
+    return result;
+  };
 }
 
 
@@ -154,9 +186,11 @@ export function logger(func, logFunc) {
  *   partialUsingArguments(fn, 'a','b','c')('d') => 'abcd'
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
-export function partialUsingArguments(fn) {
-  /* implement your code here */
-  throw new Error('Not implemented');
+export function partialUsingArguments(func, ...args) {
+  return function(...arr){    
+    let resultData = args.concat(arr);
+    return func(...resultData);
+  };
 }
 
 
@@ -178,6 +212,7 @@ export function partialUsingArguments(fn) {
  *   getId10() => 11
  */
 export function getIdGeneratorFunction(startFrom) {
-  /* implement your code here */
-  throw new Error('Not implemented');
+  return ()=>{    
+    return startFrom++;
+  };
 }
