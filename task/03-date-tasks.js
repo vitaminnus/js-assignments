@@ -55,19 +55,8 @@ function parseDataFromIso8601(value) {
  *    Date(2015,1,1)    => false
  */
 function isLeapYear(date) {
-  // const year = date.getFullYear();
-  // let result;
-  // if (year % 4 !== 0) {
-  //   result = false;
-  // } else if (year % 100 !== 0) {
-  //   result = true;
-  // } else if (year % 400 !== 0) {
-  //   result = false;
-  // } else {
-  //   result = true;
-  // }
-  // return result;
-  throw new Error('Not implemented');
+  const year = date.getFullYear();
+  return ((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0);
 }
 
 
@@ -87,6 +76,9 @@ function isLeapYear(date) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
 function timeSpanToString(startDate, endDate) {
+  // console.log(startDate.getHours());
+  // const res = endDate - startDate;
+  // return (`0${endDate.getHours() - startDate.getHours()}:0${endDate.getMinutes() - startDate.getMinutes()}:${endDate.getSeconds() - startDate.getSeconds()}.${endDate.getMilliseconds() - startDate.getMilliseconds()}`);
   // const res = endDate - startDate;
   // const msec  = Math.floor(res)%1000;
   // const sec   = Math.floor(res/1000)%60;
@@ -96,9 +88,7 @@ function timeSpanToString(startDate, endDate) {
   //   str = str.toString();
   //   return str.length < max ? addZeros('0' + str, max) : str;
   // }
-  // return `${addZeros (hours, 2)}:
-  // ${addZeros (min, 2)}:
-  // ${addZeros (sec, 2)}.${addZeros (msec, 3)}`;
+  // return `${addZeros (hours, 2)}:${addZeros (min, 2)}:${addZeros (sec, 2)}.${addZeros (msec, 3)}`;
   throw new Error('Not implemented');
 }
 
@@ -120,8 +110,15 @@ function timeSpanToString(startDate, endDate) {
 function angleBetweenClockHands(date) {
   // const hours = date.getUTCHours();
   // const minutes = date.getUTCMinutes();
-  // let angle = Math.abs(0.5 * (60 * hours - 11 * minutes)) * Math.PI/180;
-  // angle = angle % (2 * Math.PI);
+  // let diff = Math.abs(Math.floor((hours % 12 + minutes/60) * 30) - minutes * 6);
+  // if (diff > 180) {
+  //   diff = 360 - diff;
+  // }
+  // console.log(Math.PI/2);
+  // const res = Math.abs(hours*30+Math.floor(minutes/2)-minutes*6)%360;
+  // console.log(res);
+  // return res;
+  // let angle = (Math.abs(0.5*(60*hours - 11*minutes))*Math.PI/180)%(2*Math.PI);
   // if (angle > Math.PI) {
   //   angle = 2 * Math.PI - angle;
   // }

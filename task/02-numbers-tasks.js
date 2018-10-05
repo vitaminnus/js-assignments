@@ -111,12 +111,7 @@ function getLinearEquationRoot(a, b) {
  *   (0,1) (1,2)     => 0
  */
 function getAngleBetweenVectors(x1, y1, x2, y2) {
-  // const compose = x1 * x2 + y1 * y2;
-  // const vectorA = Math.abs(Math.sqrt(Math.pow(x1, 2) + Math.pow(y1, 2)));
-  // const vectorB = Math.abs(Math.sqrt(Math.pow(x2, 2) + Math.pow(y2, 2)));
-  // const cosAngle = compose / (vectorA * vectorB);
-  // return Math.acos(cosAngle);
-  throw new Error('Not implemented');
+  return Math.acos((x1*x2+y1*y2)/(Math.sqrt((x1*x1+y1*y1)*(x2*x2+y2*y2))));
 }
 
 /**
@@ -208,27 +203,10 @@ function roundToPowerOfTen(num, pow) {
  *   17 => true
  */
 function isPrime(n) {
-  // if (n === 1) {
-  //   return false;
-  // }
-  // if (n === 2 || n === 3) {
-  //   return true;
-  // }
-  // if (n % 2 === 0 || n % 3 === 0) {
-  //   return false;
-  // }
-  // let i = 5;
-  // let flag = true;
-  // while (Math.pow(i, 2) <= n) {
-  //   if (n % i === 0 || n % (i + 2) === 0){
-  //     flag = false;
-  //     break;
-  //   } else {
-  //     i += 6;
-  //   }
-  // }
-  // return flag;
-  throw new Error('Not implemented');
+  for (let i = 2; i < n; i++){
+    if(n % i === 0) return false;
+  }
+  return n !== 1 && n !== 0;
 }
 
 /**
