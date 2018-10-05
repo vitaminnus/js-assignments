@@ -111,11 +111,12 @@ function getLinearEquationRoot(a, b) {
  *   (0,1) (1,2)     => 0
  */
 function getAngleBetweenVectors(x1, y1, x2, y2) {
-  const compose = x1 * x2 + y1 * y2;
-  const vectorA = Math.abs(Math.sqrt(Math.pow(x1, 2) + Math.pow(y1, 2)));
-  const vectorB = Math.abs(Math.sqrt(Math.pow(x2, 2) + Math.pow(y2, 2)));
-  const cosAngle = compose / (vectorA * vectorB);
-  return Math.acos(cosAngle);
+  // const compose = x1 * x2 + y1 * y2;
+  // const vectorA = Math.abs(Math.sqrt(Math.pow(x1, 2) + Math.pow(y1, 2)));
+  // const vectorB = Math.abs(Math.sqrt(Math.pow(x2, 2) + Math.pow(y2, 2)));
+  // const cosAngle = compose / (vectorA * vectorB);
+  // return Math.acos(cosAngle);
+  throw new Error('Not implemented');
 }
 
 /**
