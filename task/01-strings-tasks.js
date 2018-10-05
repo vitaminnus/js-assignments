@@ -19,7 +19,7 @@
  *   'aa',''    => 'aa'
  *   '',  'bb'  => 'bb'
  */
-export function concatenateStrings(value1, value2) {
+function concatenateStrings(value1, value2) {
   return value1 + value2;
 }
 
@@ -34,7 +34,7 @@ export function concatenateStrings(value1, value2) {
  *   'b'     => 1
  *   ''      => 0
  */
-export function getStringLength(value) {
+function getStringLength(value) {
   return value.length;
 }
 
@@ -51,7 +51,7 @@ export function getStringLength(value) {
  *   'John','Doe'      => 'Hello, John Doe!'
  *   'Chuck','Norris'  => 'Hello, Chuck Norris!'
  */
-export function getStringFromTemplate(firstName, lastName) {
+function getStringFromTemplate(firstName, lastName) {
   return `Hello, ${firstName} ${lastName}!`;
 }
 
@@ -65,7 +65,7 @@ export function getStringFromTemplate(firstName, lastName) {
  *   'Hello, John Doe!' => 'John Doe'
  *   'Hello, Chuck Norris!' => 'Chuck Norris'
  */
-export function  extractNameFromTemplate(value) {
+function  extractNameFromTemplate(value) {
   return value.slice(7, -1);
 }
 
@@ -80,7 +80,7 @@ export function  extractNameFromTemplate(value) {
  *   'John Doe'  => 'J'
  *   'cat'       => 'c'
  */
-export function getFirstChar(value) {
+function getFirstChar(value) {
   return value[0];
 }
 
@@ -95,7 +95,7 @@ export function getFirstChar(value) {
  *   'cat'              => 'cat'
  *   '\tHello, World! ' => 'Hello, World!'
  */
-export function removeLeadingAndTrailingWhitespaces(value) {
+function removeLeadingAndTrailingWhitespaces(value) {
   return value.trim();
 }
 
@@ -110,7 +110,7 @@ export function removeLeadingAndTrailingWhitespaces(value) {
  *   'A', 5  => 'AAAAA'
  *   'cat', 3 => 'catcatcat'
  */
-export function repeatString(value, count) {  
+function repeatString(value, count) {
   return value.repeat(count);
 }
 
@@ -126,7 +126,7 @@ export function repeatString(value, count) {
  *   'I like legends', 'end' => 'I like legs',
  *   'ABABAB','BA' => 'ABAB'
  */
-export function removeFirstOccurrences(str, value)  {
+function removeFirstOccurrences(str, value)  {
   return str.replace(value, '');
 }
 
@@ -141,7 +141,7 @@ export function removeFirstOccurrences(str, value)  {
  *   '<span>' => 'span'
  *   '<a>' => 'a'
  */
-export function unbracketTag(str) {
+function unbracketTag(str) {
   return str.slice(1, -1);
 }
 
@@ -156,7 +156,7 @@ export function unbracketTag(str) {
  *   'Thunderstruck' => 'THUNDERSTRUCK'
  *  'abcdefghijklmnopqrstuvwxyz' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
  */
-export function convertToUpperCase(str) {
+function convertToUpperCase(str) {
   return str.toUpperCase();
 }
 
@@ -171,7 +171,7 @@ export function convertToUpperCase(str) {
  *     ['angus.young@gmail.com', 'brian.johnson@hotmail.com', 'bon.scott@yahoo.com']
  *   'info@gmail.com' => ['info@gmail.com']
  */
-export function extractEmails(str) {
+function extractEmails(str) {
   return str.split(';');
 }
 
@@ -198,25 +198,26 @@ export function extractEmails(str) {
  *             '└──────────┘\n'
  *
  */
-export function getRectangleString(width, height) {
-  let result = '';
-  function drawLine(firstElement, middleElement, lastElement){
-    result += firstElement;
-    for (let j=1;j<width-1;j++) {
-      result += middleElement;
-    }
-    result += lastElement + '\n';
-  }
-  for (let i=0;i<height;i++){
-    if (i === 0){
-      drawLine('\u250c', '\u2500', '\u2510');
-    } else if (i === height-1){
-      drawLine('\u2514', '\u2500', '\u2518');
-    } else {
-      drawLine('\u2502', ' ', '\u2502');
-    }
-  }
-  return result;
+function getRectangleString(width, height) {
+  // let result = '';
+  // function drawLine(firstElement, middleElement, lastElement){
+  //   result += firstElement;
+  //   for (let j=1;j<width-1;j++) {
+  //     result += middleElement;
+  //   }
+  //   result += lastElement + '\n';
+  // }
+  // for (let i=0;i<height;i++){
+  //   if (i === 0){
+  //     drawLine('\u250c', '\u2500', '\u2510');
+  //   } else if (i === height-1){
+  //     drawLine('\u2514', '\u2500', '\u2518');
+  //   } else {
+  //     drawLine('\u2502', ' ', '\u2502');
+  //   }
+  // }
+  // return result;
+  throw new Error('Not implemented');
 }
 
 
@@ -236,18 +237,19 @@ export function getRectangleString(width, height) {
  *          'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-export function encodeToRot13(str) {
+function encodeToRot13(str) {
   const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  let arr = str.split('');
+  const arr = str.split('');
 
-  let result = arr.map(letter => {
-    let upperCaseLetter = letter.toUpperCase();
-    let index = letters.indexOf(upperCaseLetter);
+  const result = arr.map(letter => {
+    const upperCaseLetter = letter.toUpperCase();
+    const index = letters.indexOf(upperCaseLetter);
     if (index === -1) {
       return letter;
     } else {
-      let encodeIndex = (index + 13) % 26;      
-      return letter === letter.toUpperCase() ? letters[encodeIndex] : letters[encodeIndex].toLowerCase();
+      const encodeIndex = (index + 13) % 26;
+      return letter === letter.toUpperCase() ?
+        letters[encodeIndex] : letters[encodeIndex].toLowerCase();
     }
   });
   return result.join('');
@@ -266,7 +268,7 @@ export function encodeToRot13(str) {
  *   isString('test') => true
  *   isString(new String('test')) => true
  */
-export function isString(value) {
+function isString(value) {
   return Object.prototype.toString.call(value) === '[object String]';
 }
 
@@ -295,44 +297,63 @@ export function isString(value) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-export function getCardId(value) {
-  let i;
-  let j;
-  let temp = value[1];
-  switch(true){
-  case value[0] === 'A':
-    i = 0;
-    break;
-  case value[0] === 'J':
-    i = 10;
-    break;
-  case value[0] === 'Q':
-    i = 11;
-    break;
-  case value[0] === 'K':
-    i = 12;
-    break;
-  case value[0] === '1':
-    i = 9;
-    temp = value[2];
-    break;
-  case value[0] >= 2 && value[0] <= 9 :
-    i = value[0] - 1;
-    break;
-  } 
-  switch(temp){
-  case '\u2663':
-    j = 0;
-    break;
-  case '\u2666':
-    j = 1;
-    break;
-  case '\u2665':
-    j = 2;
-    break;
-  case '\u2660':
-    j = 3;
-    break;    
-  }  
-  return j * 13 + i;
+function getCardId(value) {
+  // let i;
+  // let j;
+  // let temp = value[1];
+  // switch(true){
+  // case value[0] === 'A':
+  //   i = 0;
+  //   break;
+  // case value[0] === 'J':
+  //   i = 10;
+  //   break;
+  // case value[0] === 'Q':
+  //   i = 11;
+  //   break;
+  // case value[0] === 'K':
+  //   i = 12;
+  //   break;
+  // case value[0] === '1':
+  //   i = 9;
+  //   temp = value[2];
+  //   break;
+  // case value[0] >= 2 && value[0] <= 9 :
+  //   i = value[0] - 1;
+  //   break;
+  // }
+  // switch(temp){
+  // case '\u2663':
+  //   j = 0;
+  //   break;
+  // case '\u2666':
+  //   j = 1;
+  //   break;
+  // case '\u2665':
+  //   j = 2;
+  //   break;
+  // case '\u2660':
+  //   j = 3;
+  //   break;
+  // }
+  // return j * 13 + i;
+  throw new Error('Not implemented');
 }
+
+module.exports = {
+  concatenateStrings: concatenateStrings,
+  getStringLength: getStringLength,
+  getStringFromTemplate: getStringFromTemplate,
+  extractNameFromTemplate: extractNameFromTemplate,
+  getFirstChar: getFirstChar,
+  removeLeadingAndTrailingWhitespaces: removeLeadingAndTrailingWhitespaces,
+  repeatString: repeatString,
+  removeFirstOccurrences: removeFirstOccurrences,
+  unbracketTag: unbracketTag,
+  convertToUpperCase: convertToUpperCase,
+  extractEmails: extractEmails,
+  getRectangleString: getRectangleString,
+  encodeToRot13: encodeToRot13,
+  isString: isString,
+  getCardId: getCardId
+};

@@ -24,10 +24,11 @@
  *   getComposition(Math.sin, Math.asin)(x) => Math.sin(Math.acos(x))
  *
  */
-export function getComposition(f, g) {
-  return function(x){
-    return f(g(x));
-  };
+function getComposition(f, g) {
+  // return function(x){
+  //   return f(g(x));
+  // };
+  throw new Error('Not implemented');
 }
 
 
@@ -47,10 +48,11 @@ export function getComposition(f, g) {
  *   power05(16) => 4
  *
  */
-export function getPowerFunction(exponent) {
-  return function(x){
-    return Math.pow(x, exponent);
-  };
+function getPowerFunction(exponent) {
+  // return function(x){
+  //   return Math.pow(x, exponent);
+  // };
+  throw new Error('Not implemented');
 }
 
 
@@ -67,10 +69,10 @@ export function getPowerFunction(exponent) {
  *   getPolynom(8)     => y = 8
  *   getPolynom()      => null
  */
-export function getPolynom(...args) {    
-  let reversArray = args.reverse();
+function getPolynom(...args) {
+  const reversArray = args.reverse();
   return function(x){
-    let result = 0;    
+    let result = 0;
     for (let i=0;i<reversArray.length;i++){
       result += reversArray[i] * Math.pow(x, i);
     }
@@ -93,15 +95,15 @@ export function getPolynom(...args) {
  *   ...
  *   memoizer() => the same random number  (next run, returns the previous cached result)
  */
-export function memoize(func) {
-  let cache = {};
+function memoize(func) {
+  const cache = {};
   return (...args) => {
-    let n = args[0];
+    const n = args[0];
     if (n in cache) {
       return cache[n];
     }
     else {
-      let result = func(n);
+      const result = func(n);
       cache[n] = result;
       return result;
     }
@@ -124,18 +126,19 @@ export function memoize(func) {
  * }, 2);
  * retryer() => 2
  */
-export function retry(func, attempts) {
-  function f(){
-    for(let i=0;i<attempts;i++){
-      try {  
-        let res = func();
-        return res;
-      } catch(e) {
-        console.log(e.message);
-      }
-    }      
-  }     
-  return f;
+function retry(func, attempts) {
+  // function f(){
+  //   for(let i=0;i<attempts;i++){
+  //     try {
+  //       const res = func();
+  //       return res;
+  //     } catch(e) {
+  //       console.log(e.message);
+  //     }
+  //   }
+  // }
+  // return f;
+  throw new Error('Not implemented');
 }
 
 
@@ -162,12 +165,12 @@ export function retry(func, attempts) {
  * cos(3.141592653589793) ends
  *
  */
-export function logger(func, logFunc) {
+function logger(func, logFunc) {
   return function(...args){
-    let string = JSON.stringify(args).slice(1, -1);
+    const string = JSON.stringify(args).slice(1, -1);
     logFunc(`${func.name}(${string}) starts`);
-    let result = func(...args);
-    logFunc(`${func.name}(${string}) ends`);     
+    const result = func(...args);
+    logFunc(`${func.name}(${string}) ends`);
     return result;
   };
 }
@@ -186,16 +189,17 @@ export function logger(func, logFunc) {
  *   partialUsingArguments(fn, 'a','b','c')('d') => 'abcd'
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
-export function partialUsingArguments(func, ...args) {
-  return function(...arr){    
-    let resultData = args.concat(arr);
-    return func(...resultData);
-  };
+function partialUsingArguments(func, ...args) {
+  // return function(...arr){
+  //   const resultData = args.concat(arr);
+  //   return func(...resultData);
+  // };
+  throw new Error('Not implemented');
 }
 
 
 /**
- * Returns the id generator function that returns next integer starting from specified 
+ * Returns the id generator function that returns next integer starting from specified
  * number every time when invoking.
  *
  * @param {Number} startFrom
@@ -211,8 +215,20 @@ export function partialUsingArguments(func, ...args) {
  *   getId4() => 7
  *   getId10() => 11
  */
-export function getIdGeneratorFunction(startFrom) {
-  return ()=>{    
-    return startFrom++;
-  };
+function getIdGeneratorFunction(startFrom) {
+  // return ()=>{
+  //   return startFrom++;
+  // };
+  throw new Error('Not implemented');
 }
+
+module.exports = {
+  getComposition: getComposition,
+  getPowerFunction: getPowerFunction,
+  getPolynom: getPolynom,
+  memoize: memoize,
+  retry: retry,
+  logger: logger,
+  partialUsingArguments: partialUsingArguments,
+  getIdGeneratorFunction: getIdGeneratorFunction
+};

@@ -29,9 +29,11 @@
  *
  * @return {RegExp}
  */
-export function getRegexForGuid() {
-  let regex = /{[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}}/;
-  return regex;
+function getRegexForGuid() {
+  // const regex =
+  // /{[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}}/;
+  // return regex;
+  throw new Error('Not implemented');
 }
 
 
@@ -52,9 +54,8 @@ export function getRegexForGuid() {
  * @return {RegExp}
  *
  */
-export function getRegexForPitSpot() {
-  let regex = /p.t/;
-  return regex;
+function getRegexForPitSpot() {
+  return /p.t/;
 }
 
 
@@ -72,8 +73,8 @@ export function getRegexForPitSpot() {
  *
  * @return {RegExp}
  */
-export function getRegexForIPv4() {
-  let regex = /^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+function getRegexForIPv4() {
+  const regex = /^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
   return regex;
 }
 
@@ -92,9 +93,10 @@ export function getRegexForIPv4() {
  *                                   '0S4-H1-HACK'
  * @return {RegExp}
  */
-export function getRegexForSSN() {
-  let regex = /(?!000)\d{3}-(?!00)\d{2}-(?!0000)\d{4}/;
-  return regex;
+function getRegexForSSN() {
+  // const regex = /(?!000)\d{3}-(?!00)\d{2}-(?!0000)\d{4}/;
+  // return regex;
+  throw new Error('Not implemented');
 }
 
 
@@ -118,7 +120,15 @@ export function getRegexForSSN() {
  *   'PASSW0RD'.match(validator)  => false
  *   'Pa55'.match(validator) => false
  */
-export function getPasswordValidator(minLength) {
-  let regex = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])[a-zA-Z0-9]{' + minLength + ',}$');
+function getPasswordValidator(minLength) {
+  const regex = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])[a-zA-Z0-9]{' + minLength + ',}$');
   return regex;
 }
+
+module.exports = {
+  getRegexForGuid: getRegexForGuid,
+  getRegexForPitSpot: getRegexForPitSpot,
+  getRegexForIPv4: getRegexForIPv4,
+  getRegexForSSN: getRegexForSSN,
+  getPasswordValidator: getPasswordValidator
+};

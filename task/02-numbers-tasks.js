@@ -20,7 +20,7 @@
  *   5, 10 => 50
  *   5, 5  => 25
  */
-export function getRectangleArea(width, height) {
+function getRectangleArea(width, height) {
   return width * height;
 }
 
@@ -36,7 +36,7 @@ export function getRectangleArea(width, height) {
  *   3.14 => 19.729201864543903
  *   0    => 0
  */
-export function getCicleCircumference(radius) {
+function getCicleCircumference(radius) {
   return 2 * Math.PI * radius;
 }
 
@@ -52,7 +52,7 @@ export function getCicleCircumference(radius) {
  *  10, 0  => 5
  *  -3, 3  => 0
  */
-export function getAverage(value1, value2) {
+function getAverage(value1, value2) {
   return (value1/2 + value2/2);
 }
 
@@ -71,10 +71,11 @@ export function getAverage(value1, value2) {
  *   (0,0) (1,0)    => 1
  *   (-5,0) (10,-10) => 18.027756377319946
  */
-export function getDistanceBetweenPoints(x1, y1, x2, y2) {
-  let a = x2 - x1;
-  let b = y2 - y1;
-  return Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
+function getDistanceBetweenPoints(x1, y1, x2, y2) {
+  // const a = x2 - x1;
+  // const b = y2 - y1;
+  // return Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
+  throw new Error('Not implemented');
 }
 
 /**
@@ -89,7 +90,7 @@ export function getDistanceBetweenPoints(x1, y1, x2, y2) {
  *   x + 8 = 0       => -8
  *   5*x = 0         => 0
  */
-export function getLinearEquationRoot(a, b) {
+function getLinearEquationRoot(a, b) {
   return -b/a;
 }
 
@@ -112,12 +113,13 @@ export function getLinearEquationRoot(a, b) {
  *   (0,1) (0,1)     => 0
  *   (0,1) (1,2)     => 0
  */
-export function getAngleBetweenVectors(x1, y1, x2, y2) {
-  const compose = x1 * x2 + y1 * y2;
-  const vectorA = Math.abs(Math.sqrt(Math.pow(x1, 2) + Math.pow(y1, 2)));
-  const vectorB = Math.abs(Math.sqrt(Math.pow(x2, 2) + Math.pow(y2, 2)));
-  const cosAngle = compose / (vectorA * vectorB);
-  return Math.acos(cosAngle);
+function getAngleBetweenVectors(x1, y1, x2, y2) {
+  // const compose = x1 * x2 + y1 * y2;
+  // const vectorA = Math.abs(Math.sqrt(Math.pow(x1, 2) + Math.pow(y1, 2)));
+  // const vectorB = Math.abs(Math.sqrt(Math.pow(x2, 2) + Math.pow(y2, 2)));
+  // const cosAngle = compose / (vectorA * vectorB);
+  // return Math.acos(cosAngle);
+  throw new Error('Not implemented');
 }
 
 /**
@@ -132,7 +134,7 @@ export function getAngleBetweenVectors(x1, y1, x2, y2) {
  *     5     => 5
  *     0     => 0
  */
-export function getLastDigit(value) {
+function getLastDigit(value) {
   return Number(value.toString().split('').pop());
 }
 
@@ -148,7 +150,7 @@ export function getLastDigit(value) {
  *     '37'     => 37
  * '-525.5'     => -525.5
  */
-export function parseNumberFromString(value) {
+function parseNumberFromString(value) {
   return Number(value);
 }
 
@@ -165,9 +167,8 @@ export function parseNumberFromString(value) {
  *   3,3,3   => 5.196152422706632
  *   1,2,3   => 3.741657386773941
  */
-export function getParallelipidedDiagonal(a, b, c) {
-  const result = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2) + Math.pow(c, 2));
-  return result;
+function getParallelipidedDiagonal(a, b, c) {
+  return Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2) + Math.pow(c, 2));
 }
 
 /**
@@ -187,10 +188,9 @@ export function getParallelipidedDiagonal(a, b, c) {
  *   1678, 2  => 1700
  *   1678, 3  => 2000
  */
-export function roundToPowerOfTen(num, pow) {
+function roundToPowerOfTen(num, pow) {
   const power = Math.pow(10, pow);
-  const result = Math.round(num / power) * power;
-  return result;
+  return Math.round(num / power) * power;
 }
 
 /**
@@ -210,27 +210,28 @@ export function roundToPowerOfTen(num, pow) {
  *   16 => false
  *   17 => true
  */
-export function isPrime(n) {
-  if (n === 1) {
-    return false;
-  }
-  if (n === 2 || n === 3) {
-    return true;
-  }
-  if (n % 2 === 0 || n % 3 === 0) {
-    return false;
-  }
-  let i = 5;
-  let flag = true;
-  while (Math.pow(i, 2) <= n) {
-    if (n % i === 0 || n % (i + 2) === 0){
-      flag = false;
-      break;
-    } else {
-      i += 6;
-    }
-  }
-  return flag;
+function isPrime(n) {
+  // if (n === 1) {
+  //   return false;
+  // }
+  // if (n === 2 || n === 3) {
+  //   return true;
+  // }
+  // if (n % 2 === 0 || n % 3 === 0) {
+  //   return false;
+  // }
+  // let i = 5;
+  // let flag = true;
+  // while (Math.pow(i, 2) <= n) {
+  //   if (n % i === 0 || n % (i + 2) === 0){
+  //     flag = false;
+  //     break;
+  //   } else {
+  //     i += 6;
+  //   }
+  // }
+  // return flag;
+  throw new Error('Not implemented');
 }
 
 /**
@@ -248,6 +249,21 @@ export function isPrime(n) {
  *   toNumber(42, 0) => 42
  *   toNumber(new Number(42), 0) => 42
  */
-export function toNumber(value, def) {
+function toNumber(value, def) {
   return Number(value) ?  Number(value) : def;
 }
+
+module.exports = {
+  getRectangleArea: getRectangleArea,
+  getCicleCircumference: getCicleCircumference,
+  getAverage: getAverage,
+  getDistanceBetweenPoints: getDistanceBetweenPoints,
+  getLinearEquationRoot: getLinearEquationRoot,
+  getAngleBetweenVectors: getAngleBetweenVectors,
+  getLastDigit: getLastDigit,
+  parseNumberFromString: parseNumberFromString,
+  getParallelipidedDiagonal: getParallelipidedDiagonal,
+  roundToPowerOfTen: roundToPowerOfTen,
+  isPrime: isPrime,
+  toNumber: toNumber
+};

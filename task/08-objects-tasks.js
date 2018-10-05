@@ -21,11 +21,11 @@
  *    console.log(r.height);      // => 20
  *    console.log(r.getArea());   // => 200
  */
-export function Rectangle(width, height) {
+function Rectangle(width, height) {
   this.width = width;
-  this.height = height; 
+  this.height = height;
 }
-Rectangle.prototype.getArea = function(){  
+Rectangle.prototype.getArea = function(){
   return this.width * this.height;
 };
 
@@ -40,7 +40,7 @@ Rectangle.prototype.getArea = function(){
  *    [1,2,3]   =>  '[1,2,3]'
  *    { width: 10, height : 20 } => '{"height":10,"width":20}'
  */
-export function getJSON(obj) {
+function getJSON(obj) {
   return JSON.stringify(obj);
 }
 
@@ -56,10 +56,11 @@ export function getJSON(obj) {
  *    var r = fromJSON(Rectangle.prototype, '{"width":10, "height":20}');
  *
  */
-export function fromJSON(proto, json) {
-  let props = JSON.parse(json);
-  let obj = Object.create(proto);
-  return Object.assign(obj, props);
+function fromJSON(proto, json) {
+  // const props = JSON.parse(json);
+  // const obj = Object.create(proto);
+  // return Object.assign(obj, props);
+  throw new Error('Not implemented');
 }
 
 
@@ -118,12 +119,12 @@ export function fromJSON(proto, json) {
  *  For more examples see unit tests.
  */
 
-export const cssSelectorBuilder = {
+const cssSelectorBuilder = {
   answer: '',
 
   element: function(value) {
     this.error(1);
-    let obj = Object.create(cssSelectorBuilder);
+    const obj = Object.create(cssSelectorBuilder);
     obj.i = 1;
     obj.answer = this.answer + value;
     return obj;
@@ -131,7 +132,7 @@ export const cssSelectorBuilder = {
 
   id: function(value) {
     this.error(2);
-    let obj = Object.create(cssSelectorBuilder);
+    const obj = Object.create(cssSelectorBuilder);
     obj.i = 2;
     obj.answer = this.answer + '#' + value;
     return obj;
@@ -139,7 +140,7 @@ export const cssSelectorBuilder = {
 
   class: function(value) {
     this.error(3);
-    let obj = Object.create(cssSelectorBuilder);
+    const obj = Object.create(cssSelectorBuilder);
     obj.i = 3;
     obj.answer = this.answer + '.' + value;
     return obj;
@@ -147,7 +148,7 @@ export const cssSelectorBuilder = {
 
   attr: function(value) {
     this.error(4);
-    let obj = Object.create(cssSelectorBuilder);
+    const obj = Object.create(cssSelectorBuilder);
     obj.i = 4;
     obj.answer = this.answer + '[' + value + ']';
     return obj;
@@ -155,7 +156,7 @@ export const cssSelectorBuilder = {
 
   pseudoClass: function(value) {
     this.error(5);
-    let obj = Object.create(cssSelectorBuilder);
+    const obj = Object.create(cssSelectorBuilder);
     obj.i = 5;
     obj.answer = this.answer + ':' + value;
     return obj;
@@ -163,14 +164,14 @@ export const cssSelectorBuilder = {
 
   pseudoElement: function(value) {
     this.error(6);
-    let obj = Object.create(cssSelectorBuilder);
+    const obj = Object.create(cssSelectorBuilder);
     obj.i = 6;
     obj.answer = this.answer + '::' + value;
     return obj;
   },
 
   combine: function(selector1, combinator, selector2) {
-    let obj = Object.create(cssSelectorBuilder);
+    const obj = Object.create(cssSelectorBuilder);
     obj.answer = selector1.answer + ' ' + combinator + ' ' + selector2.answer;
     return obj;
   },
@@ -180,7 +181,24 @@ export const cssSelectorBuilder = {
   },
 
   error: function(newi) {
-    if (this.i > newi) throw new Error('Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element');
-    if (this.i === newi && (newi === 1 || newi === 2 || newi === 6)) throw new Error('Element, id and pseudo-element should not occur more then one time inside the selector');
+    if (this.i > newi) {
+      throw new Error(
+        'Selector parts should be arranged in the following order:' +
+        ' element, id, class, attribute, pseudo-class, pseudo-element'
+      );
+    }
+    if (this.i === newi && (newi === 1 || newi === 2 || newi === 6)) {
+      throw new Error(
+        'Element, id and pseudo-element should' +
+        ' not occur more then one time inside the selector'
+      );
+    }
   }
+};
+
+module.exports = {
+  Rectangle: Rectangle,
+  getJSON: getJSON,
+  fromJSON: fromJSON,
+  cssSelectorBuilder: cssSelectorBuilder
 };
